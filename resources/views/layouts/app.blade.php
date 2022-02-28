@@ -50,11 +50,14 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link">
                                     {{ Auth::user()->name }}
                                 </a>
                             </li>
-                            <li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{{ route('admin.posts.create') }}">Aggiunbgi un post</a>
+                            </li>
+                            <li class="nav-item">
                                 <div class="" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
