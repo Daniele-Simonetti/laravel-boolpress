@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Boolpress</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,8 +23,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand fs-2" href="{{ url('/') }}">
+                    Boolpress
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -45,21 +45,21 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link text-center" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link">
+                                <a id="navbarDropdown" class="dropdown-item text-uppercase fw-bold text-center">
                                     {{ Auth::user()->name }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="{{ route('admin.posts.create') }}">Aggiunbgi un post</a>
+                                <a class="dropdown-item text-center" href="{{ route('admin.posts.create') }}">Add a Post</a>
                             </li>
                             <li class="nav-item">
-                                <div class="" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="logoutDiv" aria-labelledby="navbarDropdown">
+                                    <a class="btn btn-danger text-center logoutBtn" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
