@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Model\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -38,29 +39,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+
         $validateData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
         ]);
 
-        $data = $request->all();
-        $slug = Str::slug($data['title'], '-');
+        $post = new Post();
+        $post->fill($data);
+        $post->slug = $post->createSlug($data['title']);
+        $post->save();
 
-        $postPresente = Post::where('slug', $slug)->first();
-
-        $counter = 0;
-        while ($postPresente) {
-            $slug = $slug . '-' . $counter;
-            $postPresente = Post::where('slug', $slug)->first();
-            $counter++;
-        }
-
-        $newPost = new Post();
-        $newPost->fill($data);
-        $newPost->slug = $slug;
-        $newPost->save();
-
-        return redirect()->route('admin.posts.show', ['post' => $newPost]);
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**
