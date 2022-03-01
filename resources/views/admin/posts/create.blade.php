@@ -3,6 +3,13 @@
 @section('content')
     <div class="container">
       <div class="row">
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {{ session('status') }}
+            </div>
+        @endif
+    </div>
+      <div class="row">
         <div class="col">
           <form action="{{route('admin.posts.store') }}" method="POST">
             @csrf
@@ -30,6 +37,7 @@
             </div>
 
             <input class="btn btn-primary" type="submit" value="Salva">
+            <a class="btn btn-info" href="{{ route('admin.posts.index') }}">Posts</a>
           </form>
         </div>
       </div>
