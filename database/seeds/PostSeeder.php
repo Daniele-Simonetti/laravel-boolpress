@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Database\Seeder;
 use App\Model\Post;
+use App\User;
 class PostSeeder extends Seeder
 {
     /**
@@ -18,7 +19,8 @@ class PostSeeder extends Seeder
             $newPost = new Post();
             $newPost->title = $faker->sentence(3, true);
             $newPost->content = $faker->paragraphs(5, true);
-            $newPost->slug = Str::slug($newPost->title . '-' . $i);
+            $newPost->slug = Str::slug($newPost->title . '-');
+            $newPost->user_id = User::inRandomOrder()->first()->id;
             $newPost->save();
         }
     }
