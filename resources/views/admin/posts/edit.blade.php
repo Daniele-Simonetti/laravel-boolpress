@@ -24,7 +24,7 @@
               <select name="category_id" class="form-select">
                 <option value="">Select a category</option>
                 @foreach ($categories as $category)
-                    <option @if (old('category_id') == $category->id) selected @endif value="{{$category->id}}">{{ $category->name }}</option>
+                    <option @if (old('category_id', $post->category_id) == $category->id) selected @endif value="{{$category->id}}">{{ $category->name }} - {{ $category->id }}</option>
                 @endforeach
               </select>
               @error('category_id')
