@@ -22,6 +22,18 @@ class PostController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUser()
+    {
+        $posts = Post::where('user_id', Auth::user()->id)->paginate(20);
+        return view('admin.posts.index', ['posts' => $posts]);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
