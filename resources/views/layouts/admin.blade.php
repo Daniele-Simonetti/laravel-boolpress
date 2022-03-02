@@ -55,6 +55,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.categories.index') }}">
+                                        <i class="bi bi-files"></i>
+                                        All categories
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="#">
                                         <i class="bi bi-folder"></i>
                                         Categories

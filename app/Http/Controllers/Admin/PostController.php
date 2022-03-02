@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\Category;
 use App\Model\Post;
 use App\Http\Controllers\Controller;
+use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,10 +55,13 @@ class PostController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
 
-        $validateData = $request->validate([
-            'title' => 'required|max:255',
+        $validateData = $request->validate(
+            [
+            'title' => 'required|max:240',
             'content' => 'required',
-        ]);
+            'category_id' => 'exists:App\Model\Category,id'
+            ]
+        );
 
         $post = new Post();
         $post->fill($data);

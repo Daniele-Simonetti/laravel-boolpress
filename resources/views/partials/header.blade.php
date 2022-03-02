@@ -5,7 +5,7 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 @guest
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -13,9 +13,10 @@
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
+                    <a class="btn btn-light me-5" href="{{ route('admin.home') }}">{{ Auth::user()->name }}</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <input type="submit" class="btn btn-light" value="Logout">
+                        <input type="submit" class="btn btn-danger" value="Logout">
                     </form>
                 @endguest
             </div>
