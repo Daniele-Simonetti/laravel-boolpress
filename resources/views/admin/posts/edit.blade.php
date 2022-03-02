@@ -11,7 +11,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <h1>Create New Post</h1>
+        <h1>Modify {{ $post->title }}</h1>
       </div>
     </div>
       <div class="row">

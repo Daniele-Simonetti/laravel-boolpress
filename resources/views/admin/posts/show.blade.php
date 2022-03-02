@@ -14,16 +14,13 @@
                 <h1>
                     {{ $post->title }}
                 </h1>
+                <h2>Category: {{ $post->category()->first()->name }} </h2>
+                <h3>Author: {{ $post->user()->first()->name }} </h3>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 {{ $post->content }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <a class="btn btn-info my-5" href="{{ route('admin.posts.index') }}">Back to All</a>
             </div>
         </div>
     </div>
