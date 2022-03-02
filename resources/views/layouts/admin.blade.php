@@ -48,6 +48,12 @@
                                         All Posts
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-folder"></i>
+                                        Categories
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </nav>

@@ -1,20 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
-a {
-  margin: 0 5em;
-}
-
-a.logoutBtn {
-  padding: 0 3em;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.logoutDiv {
-  height: 100%;
-}
-
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
