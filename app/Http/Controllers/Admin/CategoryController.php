@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -18,6 +20,7 @@ class CategoryController extends Controller
         $categories = Category::orderBy('name')->paginate(20);
         return view('admin.categories.index', ['categories' => $categories]);
     }
+
 
     public function show(Category $category)
     {
