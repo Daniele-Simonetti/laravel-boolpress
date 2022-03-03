@@ -36,6 +36,10 @@
                             <td>{{ $category->updated_at }}</td>
                             <td><a class="btn btn-primary" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
                             </td>
+                            <td>
+                                <a class="btn btn-info"
+                                href="{{ route('admin.categories.edit', $category->slug) }}">Modify</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

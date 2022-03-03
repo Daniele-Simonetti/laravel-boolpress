@@ -37,6 +37,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page"
+                                        href="{{ route('admin.categories.create') }}">
+                                        Add Category
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="{{ route('admin.home') }}">
                                         <i class="bi bi-house"></i>
                                         Dashboard
