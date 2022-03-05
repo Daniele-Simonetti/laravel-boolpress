@@ -40,6 +40,7 @@
                                 <a class="btn btn-info"
                                 href="{{ route('admin.categories.edit', $category->slug) }}">Modify</a>
                             </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>

@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', ['categories' => $categories]);
+        return view('admin.categories.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -51,9 +51,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $categories = Category::all();
-
-        return view('admin.categories.edit', ['categories' => $categories]);
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     public function update(Request $request, Category $category)

@@ -11,7 +11,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <h1>Modify {{ $categories->name }}</h1>
+        <h1>Modify {{$category->name}}</h1>
       </div>
     </div>
       <div class="row">
@@ -22,7 +22,7 @@
 
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+              <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="{{ $category->name }}">
               @error('name')
                   <div class="alert alert-danger">
                       {{ $message }}
