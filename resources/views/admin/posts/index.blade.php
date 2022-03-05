@@ -29,32 +29,58 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($posts as $post)
-                        <tr>
-                            <td>{{ $post->id }}</td>
-                            <td>{{ $post->title }}</td>
-                            <td>{{ $post->category_id }}</td>
-                            <td>{{ $post->created_at }}</td>
-                            <td>{{ $post->updated_at }}</td>
-                            <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
-                            </td>
-                            <td>
-                                @if (Auth::user()->id === $post->user_id)
-                                    <a class="btn btn-info"
+                    @if (Auth::user()->roles()->get()->contains('1'))
+                        @foreach ($posts as $post)
+                            <tr>
+                                <td>{{ $post->id }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->category_id }}</td>
+                                <td>{{ $post->created_at }}</td>
+                                <td>{{ $post->updated_at }}</td>
+                                <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
+                                </td>
+                                <td>
+                                    @if (Auth::user()->id === $post->user_id)
+                                        <a class="btn btn-info"
                                         href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
-                                @endif
-                            </td>
-                            <td>
-                                @if (Auth::user()->id === $post->user_id)
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (Auth::user()->id === $post->user_id)
+                                        <form action="{{ route('admin.posts.destroy', $post) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        @foreach (Auth::user()->posts()->get() as $post)
+                            <tr>
+                                <td>{{ $post->id }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->category_id }}</td>
+                                <td>{{ $post->created_at }}</td>
+                                <td>{{ $post->updated_at }}</td>
+                                <td><a class="btn btn-primary"
+                                href="{{ route('admin.posts.show', $post->slug) }}">View</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info"
+                                    href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
+                                </td>
+                                <td>
                                     <form action="{{ route('admin.posts.destroy', $post) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <input class="btn btn-danger" type="submit" value="Delete">
                                     </form>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
                 <tfoot>
                     <tr>
