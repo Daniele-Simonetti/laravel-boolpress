@@ -33,10 +33,40 @@
                   </div>
               @enderror
             </div>
+
+            @error('tags.*')
+            <div class="alert alert-danger mt-3">
+              {{ $message }}
+            </div>
+            @enderror
+            <fieldset class="mb-3">
+              <legend>Tags</legend>
+              @if ($errors->any())
+                @foreach ($tags as $tag)
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tags[]"
+                    {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{ $tag->name }}
+                    </label>
+                  </div>
+                  @endforeach
+              @else
+                @foreach ($tags as $tag)
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tags[]"
+                    {{ $post->tags()->get()->contains($tag->id)? 'checked': '' }}>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{ $tag->name }}
+                    </label>
+                  </div>
+                @endforeach
+              @endif
+            </fieldset>
             
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
+              <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" placeholder="{{ $post->title }}">
               @error('title')
                   <div class="alert alert-danger">
                       {{ $message }}
@@ -44,7 +74,7 @@
               @enderror
               <label for="content" class="form-label">Content</label>
               <textarea class="form-control" id="content" rows="3"
-                  name="content">{{ old('content') }}</textarea>
+                  name="content" placeholder="{{ $post->content }}">{{ old('content') }}</textarea>
               @error('content')
                   <div class="alert alert-danger">
                       {{ $message }}

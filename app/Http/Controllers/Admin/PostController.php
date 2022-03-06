@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Post;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +42,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', ['categories' => $categories]);
+        $tags = Tag::all();
+        return view('admin.posts.create', ['categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -59,7 +61,8 @@ class PostController extends Controller
             [
             'title' => 'required|max:240',
             'content' => 'required',
-            'category_id' => 'exists:App\Model\Category,id'
+            'category_id' => 'exists:App\Model\Category,id',
+            'tags.*' => 'nullable|exists:App\Model\Tag,id',
             ]
         );
 
@@ -67,6 +70,10 @@ class PostController extends Controller
         $post->fill($data);
         $post->slug = $post->createSlug($data['title']);
         $post->save();
+
+        if (!empty($data['tags'])) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post->slug);
     }
@@ -94,8 +101,9 @@ class PostController extends Controller
             abort('493');
         }
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
