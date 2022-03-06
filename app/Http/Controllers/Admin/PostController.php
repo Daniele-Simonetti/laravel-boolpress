@@ -124,7 +124,8 @@ class PostController extends Controller
             [
                 'title' => 'required|max:240',
                 'content' => 'required',
-                'category_id' => 'exists:App\Model\Category,id'
+                'category_id' => 'exists:App\Model\Category,id',
+                'tags.*' => 'nullable|exists:App\Model\Tag,id',
             ]
         );
 
@@ -140,6 +141,13 @@ class PostController extends Controller
         }
 
         $post->update();
+
+        if (!empty($data['tags'])) {
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
+        
         return redirect()->route('admin.posts.show', $post);
     }
 
@@ -151,6 +159,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (Auth::user()->id != $post->user_id && !Auth::user()->roles()->get()->contains(1)) {
+            abort('403');
+        }
+
+        $post->tags()->detach();
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('status', "Post id $post->id deleted");
