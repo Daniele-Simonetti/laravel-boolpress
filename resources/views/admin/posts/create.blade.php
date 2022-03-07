@@ -16,7 +16,7 @@
     </div>
       <div class="row">
         <div class="col">
-          <form action="{{route('admin.posts.store') }}" method="POST">
+          <form action="{{route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
 
@@ -67,6 +67,26 @@
                   <div class="alert alert-danger">
                       {{ $message }}
                   </div>
+              @enderror
+            </div>
+
+            <div class="mb-3">
+              <label for="created_at" class="form-label">Created</label>
+              <input type="date" class="form-control" id="created_at" name="created_at" value="{{ old('created_at') }}">
+              @error('created_at')
+                  <div class="alert alert-danger">
+                      {{ $message }}
+                  </div>
+              @enderror
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="image">Image</label>
+              <input type="file" class="form-control" id="image" name="image">
+              @error('image')
+                <div class="alert alert-danger mt-3">
+                  {{ $message }}
+                </div>
               @enderror
             </div>
 

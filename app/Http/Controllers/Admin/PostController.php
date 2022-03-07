@@ -74,8 +74,14 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'exists:App\Model\Category,id',
             'tags.*' => 'nullable|exists:App\Model\Tag,id',
+            'image' => 'nullable|image',
             ]
         );
+
+        if (!empty($data['image'])) {
+            $img_path = Storage::put('uploads', $data['image']);
+            $data['image'] = $img_path;
+        }
 
         $post = new Post();
         $post->fill($data);
