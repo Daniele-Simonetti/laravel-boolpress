@@ -15,7 +15,7 @@ class PostTagSeeder extends Seeder
     {
         $posts = Post::all();
         foreach ($posts as $post) {
-            $tags = Post::inRandomOrder()->limit(3)->get();
+            $tags = Tag::inRandomOrder()->limit(3)->get();
             $post->tags()->attach($tags);
         }
     }
