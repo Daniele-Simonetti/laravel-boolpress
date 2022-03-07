@@ -6,6 +6,8 @@ use App\Model\Post;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Tag;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +20,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(20);
-        return view('admin.posts.index', ['posts' => $posts]);
+
+        if (Auth::user()->roles()->get()->contains('1')) 
+        {
+            $posts = Post::orderBy('created_at', 'desc')->paginate(20);
+        } else {
+            $posts = Post::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(20);
+        }
+
+        $carbon = new Carbon();
+
+        return view('admin.posts.index', ['posts' => $posts, 'carbon' => $carbon]);
     }
 
     /**
