@@ -23,6 +23,7 @@ class PostSeeder extends Seeder
             $newPost->slug = Str::slug($newPost->title . '-');
             $newPost->user_id = User::inRandomOrder()->first()->id;
             $newPost->category_id = Category::inRandomOrder()->first()->id;
+            $newPost->image = 'uploads/test.jpg';
             $newPost->save();
         }
     }

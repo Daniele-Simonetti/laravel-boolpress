@@ -143,8 +143,15 @@ class PostController extends Controller
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
                 'tags.*' => 'nullable|exists:App\Model\Tag,id',
+                'image' => 'nullable|image',
             ]
         );
+
+        if (!empty($data['image'])) {
+            Storage::delete($post->image);
+            $img_path = Storage::put('uploads', $data['image']);
+            $post->image = $img_path;
+        }
 
         if ($data['title'] != $post->title) {
             $post->title = $data['title'];
