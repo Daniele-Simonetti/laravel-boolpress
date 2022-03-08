@@ -1,6 +1,10 @@
 <template>
-  <div>
-    Navbar
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        NAVABR ESEMPIO
+      </div>
+    </div>
   </div>
 </template>
 
