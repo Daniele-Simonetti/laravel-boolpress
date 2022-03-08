@@ -57,6 +57,9 @@
                                 <input type="submit" value="Logout" class="btn btn-default">
                             </form>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="btn btn-primary" href="{{ route('admin.home') }}">utente</a>
+                        </li>
                     @endguest
                 </ul>
             </div>
