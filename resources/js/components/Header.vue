@@ -1,24 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li
               class="nav-item"
             v-for="item in menuItems"
-            :key="item"
+            :key="item.id"
           >
-            <a href="#">{{ item.label }}</a>
+            <router-link class="nav-link" :to="{ name: item.routeName}">{{item.label}}</router-link>
           </li>
         </ul>
             
@@ -39,12 +29,16 @@ export default {
           routeName: "home",
         },
         {
-          label: "Products",
-          routeName: "products",
+          label: "Posts",
+          routeName: "posts",
         },
         {
-          label: "Chi Siamo",
+          label: "About",
           routeName: "about",
+        },
+        {
+          label: "Contacts",
+          routeName: "contacts",
         },
       ],
     };
