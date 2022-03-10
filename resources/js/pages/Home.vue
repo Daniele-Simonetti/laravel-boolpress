@@ -2,7 +2,7 @@
     <div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col">
+                <div class="col d-flex justify-content-center">
                     <h1>Home</h1>
                 </div>
             </div>

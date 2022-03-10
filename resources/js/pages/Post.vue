@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div class="row" v-if="post">
+    <div class="container">
+        <div class="row mt-3" v-if="post">
             <div class="col-12">
-                <div class="card mb-3">
+                <div class="card mb-5">
                     <img
                         class="card-img-top"
                         :src="'/storage/' + post.image"
@@ -28,7 +28,7 @@ import Axios from "axios";
 
 export default {
     name: "Post",
-    porps: ["id"],
+    props: ["id"],
     data() {
         return {
             post: null,
@@ -39,8 +39,9 @@ export default {
         this.getPost(url);
     },
     methods: {
-        getPost(newPage) {
-            Axios.get(newPage).then((result) => {
+        getPost(url) {
+            console.log(url);
+            Axios.get(url).then((result) => {
                 this.post = result.data.results.data;
             });
         },
