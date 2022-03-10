@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-12" v-for="(post, index) in posts" :key="index">
         <div class="card mb-3">
           <img class="card-img-top" :src="'/storage/' + post.image" :alt="post.title">
@@ -8,6 +8,17 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.content }}</p>
             <p class="card-text"><small class="text-muted">Last updated {{ post.updated_at }}</small></p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div class="col" v-for="(post, index) in posts" :key="index">
+        <div class="card">
+          <img :src="'/storage/'+post.image" class="card-img-top" :alt="post.title">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content }}</p>
           </div>
         </div>
       </div>
@@ -53,6 +64,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.card {
+  img {
+    height: 172.35px;
+  }
+}
+  .card-body {
+    height: 300px;
+    overflow: auto;
+  }
 </style>
